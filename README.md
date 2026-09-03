@@ -222,7 +222,7 @@ http://127.0.0.1:8000
 
 CloudPass is a cloud-based bus ticket booking system. It allows passengers to register, log in, view available routes, book tickets, and retrieve their digital tickets later. The project prevents ticket loss by storing bookings in a database. It prevents incorrect pricing by calculating the fare from the official route price stored in the database, not from user-submitted browser data. It improves reliability and scalability by supporting Docker containerization and Kubernetes autoscaling, meaning multiple application instances can run behind a load balancer when traffic increases.
 
-## Development Roadmap use for project
+## Development Roadmap Used For Project
 
 - Phase 1: Planning and system design
 - Phase 2: Local Flask application foundation
