@@ -149,15 +149,13 @@ Runs CloudPass and PostgreSQL together locally.
 
 Shows how CloudPass can run in Kubernetes with multiple replicas and autoscaling.
 
-## How To Run Locally
+## Running code Locally
 
 Open PowerShell and go into the project folder:
 
 ```powershell
 cd C:\Users\oladu\Downloads\CloudPass
 ```
-
-If your folder is still named differently on your computer, rename the folder to `CloudPass` in File Explorer or use the folder name that currently exists on your machine.
 
 Create and activate a virtual environment:
 
@@ -190,7 +188,7 @@ Health check:
 http://127.0.0.1:5000/health
 ```
 
-## How To Use The App
+## Application steps
 
 1. Open `http://127.0.0.1:5000`.
 2. Click `Register`.
@@ -198,8 +196,9 @@ http://127.0.0.1:5000/health
 4. After registering, you will be sent to the routes page.
 5. Pick a route and click `Book`.
 6. Confirm the booking.
-7. The app shows your digital ticket.
+7. The app shows your digital ticket, you also get a QR code
 8. Click `My Bookings` any time after login to recover/view saved tickets.
+9. Tickets can also be saved and deleted
 
 ## How To Run Tests
 
@@ -223,7 +222,7 @@ http://127.0.0.1:8000
 
 CloudPass is a cloud-based bus ticket booking system. It allows passengers to register, log in, view available routes, book tickets, and retrieve their digital tickets later. The project prevents ticket loss by storing bookings in a database. It prevents incorrect pricing by calculating the fare from the official route price stored in the database, not from user-submitted browser data. It improves reliability and scalability by supporting Docker containerization and Kubernetes autoscaling, meaning multiple application instances can run behind a load balancer when traffic increases.
 
-## Development Roadmap
+## Development Roadmap use for project
 
 - Phase 1: Planning and system design
 - Phase 2: Local Flask application foundation
