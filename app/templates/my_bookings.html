@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}My Bookings - CloudPass{% endblock %}
+
+{% block content %}
+<section>
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Booking History</p>
+            <h1>My saved tickets</h1>
+        </div>
+        <a class="button" href="{{ url_for('main.routes') }}">Book Another Ticket</a>
+    </div>
+
+    <div class="booking-list">
+        {% for booking in bookings %}
+            <article class="booking-row">
+                <div>
+                    <strong>{{ booking.route.departure }} to {{ booking.route.destination }}</strong>
+                    <span>{{ booking.booking_reference }} | {{ booking.status }}</span>
+                </div>
+                <a class="button button-secondary" href="{{ url_for('main.ticket', booking_reference=booking.booking_reference) }}">View Ticket</a>
+                <form
+                    method="post"
+                    action="{{ url_for('main.delete_ticket', booking_reference=booking.booking_reference) }}"
+                    class="inline-form"
+                    onsubmit="return confirm('Delete this ticket? This cannot be undone.');"
+                >
+                    <button type="submit" class="button-icon button-danger">Delete</button>
+                </form>
+            </article>
+        {% else %}
+            <p>You have not booked any ticket yet.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

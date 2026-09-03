@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Routes - CloudPass{% endblock %}
+
+{% block content %}
+<section>
+    <div class="section-heading">
+        <div>
+            <p class="eyebrow">Available Routes</p>
+            <h1>Choose a bus route</h1>
+        </div>
+        <a class="button button-secondary" href="{{ url_for('main.my_bookings') }}">My Bookings</a>
+    </div>
+
+    <form class="search-bar" method="get" action="{{ url_for('main.routes') }}">
+        <input type="text" name="q" value="{{ query }}" placeholder="Search by city, e.g. Lagos or Abuja">
+        <button type="submit" class="button">Search</button>
+        {% if saved_only %}
+            <input type="hidden" name="saved" value="1">
+        {% endif %}
+        {% if query or saved_only %}
+            <a class="link-button" href="{{ url_for('main.routes') }}">Clear</a>
+        {% endif %}
+    </form>
+
+    <div class="section-heading">
+        <p>Showing {{ routes|length }} route{{ '' if routes|length == 1 else 's' }}{% if saved_only %} you saved{% endif %}.</p>
+        {% if saved_only %}
+            <a class="button button-secondary" href="{{ url_for('main.routes', q=query) }}">Show All Routes</a>
+        {% else %}
+            <a class="button button-secondary" href="{{ url_for('main.routes', q=query, saved=1) }}">Show Saved Only</a>
+        {% endif %}
+    </div>
+
+    <div class="route-grid">
+        {% for route in routes %}
+            <article class="route-card">
+                <div>
+                    <h2>{{ route.departure }} to {{ route.destination }}</h2>
+                    <p>{{ route.available_seats }} seats available</p>
+                </div>
+                <strong class="price-tag">N{{ "%.2f"|format(route.price) }}</strong>
+                <div class="route-card-actions">
+                    <a class="button" href="{{ url_for('main.book', route_id=route.id) }}">Book</a>
+                    <form method="post" action="{{ url_for('main.save_route', route_id=route.id) }}" class="inline-form">
+                        <button
+                            type="submit"
+                            class="button-icon {{ 'is-saved' if route.id in saved_ids else '' }}"
+                            aria-label="{{ 'Remove from saved routes' if route.id in saved_ids else 'Save this route' }}"
+                        >
+                            {{ '★ Saved' if route.id in saved_ids else '☆ Save' }}
+                        </button>
+                    </form>
+                </div>
+            </article>
+        {% else %}
+            <p>
+                {% if saved_only %}
+                    You have not saved any routes yet.
+                {% else %}
+                    No routes match your search.
+                {% endif %}
+            </p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

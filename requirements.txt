@@ -1,0 +1,8 @@
+Flask
+Flask-SQLAlchemy
+Flask-Login
+psycopg2-binary
+python-dotenv
+gunicorn
+qrcode[pil]==7.4.2
+psycopg2-binary==2.9.9

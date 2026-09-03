@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}Ticket - CloudPass{% endblock %}
+
+{% block content %}
+<section class="ticket-card">
+    <div class="ticket-top">
+        <svg class="bus-icon" viewBox="0 0 24 24" role="img" aria-label="Bus">
+            <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2h11A2.5 2.5 0 0 1 20 4.5v11a2.5 2.5 0 0 1-1.25 2.166V19.5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1V18H8.25v1.5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1.834A2.5 2.5 0 0 1 4 15.5v-11ZM6.5 4a.5.5 0 0 0-.5.5V10h12V4.5a.5.5 0 0 0-.5-.5h-11ZM6 12v3.5a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 .5-.5V12H6Zm1 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2Zm10 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/>
+        </svg>
+        <p class="eyebrow">Digital Ticket</p>
+    </div>
+
+    <h1>{{ booking.ticket_id }}</h1>
+
+    <div class="ticket-divider"></div>
+
+    <div class="ticket-body">
+        <dl class="details">
+            <div>
+                <dt>Booking Reference</dt>
+                <dd class="ticket-ref">{{ booking.booking_reference }}</dd>
+            </div>
+            <div>
+                <dt>Passenger</dt>
+                <dd>{{ booking.user.username }}</dd>
+            </div>
+            <div>
+                <dt>Route</dt>
+                <dd>{{ booking.route.departure }} to {{ booking.route.destination }}</dd>
+            </div>
+            <div>
+                <dt>Price Paid</dt>
+                <dd class="text-green">N{{ "%.2f"|format(booking.price_paid) }}</dd>
+            </div>
+            <div>
+                <dt>Status</dt>
+                <dd>{{ booking.status }}</dd>
+            </div>
+            <div>
+                <dt>Booked At</dt>
+                <dd>{{ booking.booked_at.strftime("%Y-%m-%d %H:%M") }}</dd>
+            </div>
+        </dl>
+
+        <div class="ticket-qr">
+            <img src="{{ qr_code }}" alt="QR code for booking {{ booking.booking_reference }}">
+            <span>Scan at boarding</span>
+        </div>
+    </div>
+
+    <div class="ticket-actions no-print">
+        <button type="button" class="button" onclick="window.print()">Print Ticket</button>
+        <a class="button button-secondary" href="{{ url_for('main.my_bookings') }}">Back to My Bookings</a>
+    </div>
+</section>
+{% endblock %}

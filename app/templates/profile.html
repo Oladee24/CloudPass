@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - CloudPass{% endblock %}
+
+{% block content %}
+<section class="ticket-preview">
+    <p class="eyebrow">Your Account</p>
+    <h1>{{ current_user.username }}</h1>
+    <dl class="details">
+        <div>
+            <dt>Email</dt>
+            <dd>{{ current_user.email }}</dd>
+        </div>
+        <div>
+            <dt>Member Since</dt>
+            <dd>{{ current_user.created_at.strftime("%Y-%m-%d") }}</dd>
+        </div>
+        <div>
+            <dt>Tickets Booked</dt>
+            <dd>{{ booking_count }}</dd>
+        </div>
+        <div>
+            <dt>Saved Routes</dt>
+            <dd>{{ saved_count }}</dd>
+        </div>
+    </dl>
+    <form method="post" action="{{ url_for('main.profile_reset_password') }}">
+        <button type="submit" class="button button-secondary">Email Me a Password Reset Link</button>
+    </form>
+</section>
+{% endblock %}
+

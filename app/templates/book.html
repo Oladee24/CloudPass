@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Book Ticket - CloudPass{% endblock %}
+
+{% block content %}
+<section class="ticket-preview">
+    <p class="eyebrow">Confirm Booking</p>
+    <h1>{{ route.departure }} to {{ route.destination }}</h1>
+    <dl class="details">
+        <div>
+            <dt>Official Price</dt>
+            <dd class="text-green">N{{ "%.2f"|format(route.price) }}</dd>
+        </div>
+        <div>
+            <dt>Available Seats</dt>
+            <dd>{{ route.available_seats }}</dd>
+        </div>
+    </dl>
+    <form method="post">
+        <button type="submit" class="button" {% if route.available_seats <= 0 %}disabled{% endif %}>
+            Confirm Booking
+        </button>
+    </form>
+</section>
+{% endblock %}

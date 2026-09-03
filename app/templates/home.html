@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}CloudPass - Home{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">Bus Ticket and Pass Bookings</p>
+        <h1>Book, store, and recover bus tickets online.</h1>
+        <p class="lead">
+            CloudPass your ready to go bus ticket and pass management system, keeps every ticket, checks every route.
+
+        </p>
+        <div class="actions">
+            {% if current_user.is_authenticated %}
+                <a class="button" href="{{ url_for('main.routes') }}">View Routes</a>
+                <a class="button button-bookings" href="{{ url_for('main.my_bookings') }}">My Bookings</a>
+            {% else %}
+                <a class="button" href="{{ url_for('main.register') }}">Create Account</a>
+                <a class="button button-secondary" href="{{ url_for('main.login') }}">Login</a>
+            {% endif %}
+        </div>
+    </div>
+    <aside class="status-panel">
+        <span class="status-label-top">Available Routes Loaded</span>
+        <span class="status-number">{{ route_count }}</span>
+    </aside>
+</section>
+
+{% if current_user.is_authenticated %}
+<section class="section-intro">
+    <p class="eyebrow">Find a route</p>
+    <h2>Search departures and destinations</h2>
+    <p>Type a city name to jump straight to matching routes — this searches the same list as the Routes page.</p>
+    <form class="search-bar" method="get" action="{{ url_for('main.routes') }}">
+        <input type="text" name="q" placeholder="Try &quot;Lagos&quot; or &quot;Abuja&quot;">
+        <button type="submit" class="button">Search Routes</button>
+    </form>
+</section>
+{% endif %}
+
+<section>
+    <div class="section-intro">
+        <p class="eyebrow">How to book</p>
+        <h2 class="section-title-lg">Three steps from booking to boarding</h2>
+    </div>
+    <div class="steps">
+        <div class="step">
+            <span class="step-index">1</span>
+            <h3>Pick a route</h3>
+            <p>Browse live seat counts and official prices pulled straight from the database.</p>
+        </div>
+        <div class="step">
+            <span class="step-index">2</span>
+            <h3>Confirm your booking</h3>
+            <p>The server locks the seat and copies the real fare into your ticket — never the price from your screen.</p>
+        </div>
+        <div class="step">
+            <span class="step-index">3</span>
+            <h3>Keep your ticket</h3>
+            <p>Log back in any time to find your digital ticket waiting in My Bookings.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="section-intro">
+        <p class="eyebrow">Why CloudPass</p>
+        <h2 class="section-title-lg section-title-italic">Built for busy travel days</h2>
+    </div>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3 class="feature-title">No lost tickets</h3>
+            <p>Every booking is saved to your account, so a lost text message or screenshot doesn't mean a lost seat.</p>
+        </div>
+        <div class="feature-card">
+            <h3 class="feature-title">Fair, fixed pricing</h3>
+            <p>Fares come from the route table on the server, so nobody can quietly change the price before paying.</p>
+        </div>
+        <div class="feature-card">
+            <h3 class="feature-title">Built to scale</h3>
+            <p>CloudPass runs in containers behind an autoscaler, so busy travel weekends don't slow down checkout.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}
