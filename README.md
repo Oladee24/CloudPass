@@ -39,7 +39,7 @@ Instead of depending on one server forever, the project includes Docker and Kube
 | Gunicorn | Production server used inside Docker/cloud hosting |
 | Docker | Packages the application so it runs consistently |
 | Docker Compose | Runs the app and database together locally |
-| Kubernetes | Cloud orchestration for multiple app replicas |
+| Kubernetes | A manifest (cloud/kubernetes/cloudpass-api.yaml) is included, describing how CloudPass could run as multiple replicas on a cluster |
 | Horizontal Pod Autoscaler | Dynamically increases app pods during high traffic |
 | unittest | Tests the important booking behavior |
 
